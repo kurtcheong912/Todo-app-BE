@@ -1,11 +1,10 @@
-package be.app.Todo.dao;
-
+package be.app.Todo.service;
 
 import be.app.Todo.entity.Task;
 
 import java.util.List;
 
-public interface TaskDAO {
+public interface TaskService {
     Task getTask(String title);
 
     List<Task> getTasks();
