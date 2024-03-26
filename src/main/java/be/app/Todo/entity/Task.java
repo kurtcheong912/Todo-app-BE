@@ -1,5 +1,10 @@
 package be.app.Todo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,28 +13,31 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "task")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "Title", columnDefinition = "nvarchar", length = 250)
+    @Column(name = "Title", columnDefinition = "varchar", length = 250)
     private String title;
 
-    @Column(name = "Description", columnDefinition = "nvarchar", length = 2000)
+    @Column(name = "Description", columnDefinition = "varchar", length = 2000)
     private String description;
 
     @Column(name = "DueDate")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dueDate;
 
-    @Column(name = "IsDeleted", columnDefinition = "bit")
-    private int isDeleted;
+
+    @Column(name = "IsDeleted", columnDefinition = "boolean default false")
+    private Boolean isDeleted;
 
     @Column(name = "Created")
-    private LocalDate created;
+    private LocalDateTime created;
 
     @Column(name = "Updated")
-    private LocalDate updated;
+    private LocalDateTime updated;
 
     public Long getId() {
         return id;
@@ -38,6 +46,8 @@ public class Task {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 
     public String getTitle() {
         return title;
@@ -63,27 +73,27 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public LocalDate getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public LocalDate getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(LocalDate updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 
-    public int getIsDeleted() {
+    public boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(int isDeleted) {
+    public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 

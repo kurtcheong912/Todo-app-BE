@@ -6,7 +6,7 @@ import be.app.Todo.entity.Task;
 import java.util.List;
 
 public interface TaskDAO {
-    Task getTask(String title);
+    Task getTask(Long id);
 
     List<Task> getTasks();
 

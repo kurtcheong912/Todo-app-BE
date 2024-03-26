@@ -5,13 +5,13 @@ import be.app.Todo.entity.Task;
 import java.util.List;
 
 public interface TaskService {
-    Task getTask(String title);
+    Task getTask(Long id);
 
     List<Task> getTasks();
 
     Task addTask(Task task);
 
-    Task editTask(Task task);
+    Task editTask(Task task,Long id);
 
-    Task deleteTask(Task task);
+    Task deleteTask(Long id);
 }
