@@ -24,6 +24,8 @@ public class Task {
     @Column(name = "Description", columnDefinition = "varchar", length = 2000)
     private String description;
 
+    @Column(name = "Category")
+    private String category;
     @Column(name = "DueDate")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -47,7 +49,13 @@ public class Task {
         this.id = id;
     }
 
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
