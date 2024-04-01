@@ -1,0 +1,47 @@
+version: "3"
+services:
+  todo-app-be:
+    image: todo-app-be:latest
+    container_name: todo-app-be
+    environment:
+    - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/TodoApp
+    - SPRING_DATASOURCE_USERNAME=postgres
+    - SPRING_DATASOURCE_PASSWORD=admin
+    - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+    - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://oauth2:8081/realms/TO-DO-APP
+    ports:
+      - "8080:8080"
+    depends_on:
+      - oauth2
+      - postgresql  # Add dependency on PostgreSQL service
+
+  todo-app-fe:
+    image: todo-app-fe:latest
+    container_name: todo-app-fe
+    ports:
+        - "4200:4200"
+    depends_on:
+        - todo-app-be
+    environment:
+        - BACKEND_URL=http://todo-app-be:8080
+
+  oauth2:
+    image: keycloak/keycloak
+    container_name: oauth2
+    command:
+      - start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8081:8080"
+
+  postgresql:  # Define PostgreSQL service
+    image: postgresql:latest
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=TodoApp
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port
