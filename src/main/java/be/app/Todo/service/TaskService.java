@@ -1,18 +1,17 @@
-package be.app.Todo.dao;
-
+package be.app.Todo.service;
 
 import be.app.Todo.entity.Task;
 
 import java.util.List;
 
-public interface TaskDAO {
+public interface TaskService {
     Task getTask(Long id);
 
     List<Task> getTasks();
 
     Task addTask(Task task);
 
-    Task editTask(Task task);
+    Task editTask(Task task, Long id);
 
-    Task deleteTask(Task task);
+    Task deleteTask(Long id);
 }
