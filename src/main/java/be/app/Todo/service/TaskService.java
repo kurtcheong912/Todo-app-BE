@@ -11,7 +11,7 @@ public interface TaskService {
 
     Task addTask(Task task);
 
-    Task editTask(Task task,Long id);
+    Task editTask(Task task, Long id);
 
     Task deleteTask(Long id);
 }

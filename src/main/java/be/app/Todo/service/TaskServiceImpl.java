@@ -19,8 +19,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task getTask(Long id) {
-        Task task= taskDAO.getTask(id);
-        if(task==null){
+        Task task = taskDAO.getTask(id);
+        if (task == null) {
             throw new NotFoundException("Task not found id :" + id);
         }
         return task;
@@ -35,7 +35,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public Task addTask(Task task) {
         task.setIsDeleted(false);
-        LocalDateTime localDateTime= LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
         task.setCreated(localDateTime);
         return taskDAO.addTask(task);
     }
@@ -44,14 +44,14 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public Task editTask(Task task, Long id) {
         Task oldTask = taskDAO.getTask(id);
-        if(oldTask==null){
+        if (oldTask == null) {
             throw new NotFoundException("Task not found id :" + task.getTitle());
         }
         oldTask.setTitle(task.getTitle());
         oldTask.setDescription(task.getDescription());
-       oldTask.setDueDate(task.getDueDate());
+        oldTask.setDueDate(task.getDueDate());
         oldTask.setCategory(task.getCategory());
-        LocalDateTime localDateTime= LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
         oldTask.setUpdated(localDateTime);
         return taskDAO.editTask(oldTask);
     }
@@ -60,7 +60,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public Task deleteTask(Long id) {
         Task task = taskDAO.getTask(id);
-        if(task==null){
+        if (task == null) {
             throw new NotFoundException("Task not found id :" + id);
         }
         task.setIsDeleted(true);

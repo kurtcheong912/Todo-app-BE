@@ -18,7 +18,6 @@ public class CustomJwt extends JwtAuthenticationToken {
     }
 
 
-
     public String getFirstname() {
         return firstname;
     }

@@ -4,8 +4,10 @@ public class ErrorExceptionResponse {
     private int status;
     private String message;
     private long timeStamp;
+
     public ErrorExceptionResponse() {
     }
+
     public ErrorExceptionResponse(Integer status, String message, long timeStamp) {
         this.status = status;
         this.message = message;
