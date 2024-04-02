@@ -12,9 +12,12 @@ public class CustomJwt extends JwtAuthenticationToken {
 
     private String lastname;
 
+
     public CustomJwt(Jwt jwt, Collection<? extends GrantedAuthority> authorities) {
         super(jwt, authorities);
     }
+
+
 
     public String getFirstname() {
         return firstname;

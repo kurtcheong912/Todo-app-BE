@@ -47,12 +47,13 @@ public class TaskServiceImpl implements TaskService {
         if(oldTask==null){
             throw new NotFoundException("Task not found id :" + task.getTitle());
         }
-        task.setId(oldTask.getId());
-        task.setCreated(oldTask.getCreated());
+        oldTask.setTitle(task.getTitle());
+        oldTask.setDescription(task.getDescription());
+       oldTask.setDueDate(task.getDueDate());
+        oldTask.setCategory(task.getCategory());
         LocalDateTime localDateTime= LocalDateTime.now();
-        task.setUpdated(localDateTime);
-        task.setIsDeleted(oldTask.getIsDeleted());
-        return taskDAO.editTask(task);
+        oldTask.setUpdated(localDateTime);
+        return taskDAO.editTask(oldTask);
     }
 
     @Override

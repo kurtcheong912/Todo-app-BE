@@ -17,7 +17,7 @@ public class TrackController {
     @PostMapping("/task")
     @PreAuthorize("hasAuthority('ROLE_User')")
     public ResponseEntity<?> addTask(@RequestBody Task task) {
-        if(task==null|| task.getTitle().isBlank()){
+        if (task == null || task.getTitle().isBlank()) {
             return new ResponseEntity<>("Request body does not match requirement", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(taskService.addTask(task), HttpStatus.OK);
@@ -32,7 +32,7 @@ public class TrackController {
     @GetMapping("/task/{id}")
     @PreAuthorize("hasAuthority('ROLE_User')")
     public ResponseEntity<?> getTask(@PathVariable Long id) {
-        if(id ==null){
+        if (id == null) {
             return new ResponseEntity<>("Request body does not match requirement", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(taskService.getTask(id), HttpStatus.OK);
@@ -41,7 +41,7 @@ public class TrackController {
     @PutMapping("/task/{id}")
     @PreAuthorize("hasAuthority('ROLE_User')")
     public ResponseEntity<?> editTask(@PathVariable Long id, @RequestBody Task task) {
-        if(task==null){
+        if (task == null) {
             return new ResponseEntity<>("Request body does not match requirement", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(taskService.editTask(task, id), HttpStatus.OK);
@@ -50,7 +50,7 @@ public class TrackController {
     @DeleteMapping("/task/{id}")
     @PreAuthorize("hasAuthority('ROLE_User')")
     public ResponseEntity<?> deleteTask(@PathVariable Long id) {
-        if(id==null){
+        if (id == null) {
             return new ResponseEntity<>("Request body does not match requirement", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(taskService.deleteTask(id), HttpStatus.OK);
